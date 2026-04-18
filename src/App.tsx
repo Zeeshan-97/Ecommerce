@@ -8,6 +8,8 @@ import {
   Row,
 } from "react-bootstrap";
 import { productSampleData } from "./data";
+import Home from "./pages/Home";
+import { NavLink, Outlet } from "react-router-dom";
 
 function App() {
   return (
@@ -16,37 +18,18 @@ function App() {
         <header>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-              <Navbar.Brand href="#home">Amazee</Navbar.Brand>
-            </Container>
+            <Navbar.Brand as={NavLink} to="/">Amazee</Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link href="/home">Home</Nav.Link>
-              <Nav.Link href="/products">Products</Nav.Link>
-              <Nav.Link href="/contact">Cart</Nav.Link>
+              <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+              <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
+              <Nav.Link as={NavLink} to="/cart">Cart</Nav.Link>
             </Nav>
+          </Container>
           </Navbar>
         </header>
         <main className="main">
           <Container fluid className="mt-3">
-            <Row>
-              {productSampleData.map((product) => (
-                <Col key={product.slug} sm={6} md={4} lg={3} className="mb-4">
-                  <Card style={{ width: "100%" }}>
-                    <div className="image_container">
-                      <Card.Img
-                        className="card-img-top"
-                        variant="top"
-                        src={product.image}
-                      />
-                    </div>
-                    <Card.Body>
-                      <Card.Title>{product.name}</Card.Title>
-                      <Card.Text>{product.description}</Card.Text>
-                      <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
+            <Outlet />
           </Container>
         </main>
         <footer>
